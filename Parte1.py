@@ -45,11 +45,11 @@ funcaoEuler = (p-1)*(q-1)
 print("\n modulo = "+hex(modulo)[2:])
 print("\n funcaoEuler = "+hex(funcaoEuler)[2:])
 
-inverso = encontrar_primo_relativo(funcaoEuler)
-print("\n inverso = "+hex(inverso)[2:])
+Ea = encontrar_primo_relativo(funcaoEuler)
+print("\n Ea = "+hex(Ea)[2:])
 
-modInverso = inverso_modular(inverso,modulo)
-print("\n modInverso = " + hex(modInverso)[2:])
+Da = inverso_modular(Ea,modulo)
+print("\n Da = " + hex(Da)[2:])
 
 
 # Gerar chave simétrica
@@ -60,5 +60,5 @@ x = pow(inteiro128bits,Ep,Np)
 print("\n x = "+hex(x)[2:])
 
 # Assinar	texto	cifrado
-sigX = pow(x,modInverso,modulo)
+sigX = pow(x,Da,modulo)
 print("\n sigX = "+hex(sigX)[2:])
