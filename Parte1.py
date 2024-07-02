@@ -1,6 +1,6 @@
-import sympy
 import random
 import sys
+from Variaveis import *
 
 sys.setrecursionlimit(1500)
 
@@ -19,6 +19,7 @@ def inverso_modular(Ea, L):
     else:
         return x % L
 
+# Função que gera dois primos relativos 
 def gerar_primo_relativo_com_inverso_128_bits(L):
     while True:
         Ea = random.randint(2, L-1)
@@ -27,31 +28,32 @@ def gerar_primo_relativo_com_inverso_128_bits(L):
             return Ea, Da
 
 # Gerar p e q como grandes números primos de 1024 bits
-p = sympy.randprime(2**1023, 2**1024)
-q = sympy.randprime(2**1023, 2**1024)
+p = Variaveis.p
+q = Variaveis.q
 
 print("\n p = "+hex(p)[2:])
 print("\n q = "+hex(q)[2:])
 
+# Calcula o módulo(Na no exercicio) e o Euler(L no exercicio)
 modulo = p*q
 funcaoEuler_L = (p-1)*(q-1)
 
 print("\n modulo = "+hex(modulo)[2:])
 print("\n funcaoEuler_L = "+hex(funcaoEuler_L)[2:])
 
+# Gera tanto o Ea quanto o Da (Chave pública e privada)
 Ea,Da = gerar_primo_relativo_com_inverso_128_bits(funcaoEuler_L)
 
 print("\n Ea = "+hex(Ea)[2:])
 print("\n Da = " + hex(Da)[2:])
 
-
-# Gerar chave simétrica
+# Chave S (escolhida dev)
 inteiro128bits = 35966238280343333638208114881239354942
 
 # Cifrar chave simétrica
-x = pow(inteiro128bits,Ep,Np)
+x = pow(inteiro128bits,int(Variaveis.Ep,16),int(Variaveis.Np,16))
 print("\n x = "+hex(x)[2:])
 
-# Assinar	texto	cifrado
+# Assinar texto	cifrado
 sigX = pow(x,Da,modulo)
 print("\n sigX = "+hex(sigX)[2:])
