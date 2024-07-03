@@ -3,16 +3,20 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad,pad
 from Variaveis import *
 
-# Mensagem cifrada em hexadecimal (exemplo)
+# Primeira iteração foi utilizando as variaveis c na mensagem e SigC na assinatura dando isso como resposta -> Arthur agora inverte esta mensagem e envia ela de volta cifrada
+# Segunda iteração foi utilizando as variaveis c2 na mensagem e SigC2 na assinatura dando isso como resposta -> Agora foi Arthur. Coloca este exemplo completo no código como comentário e submete no Moodle. AZ
+# Todas as variaveis usadas estao no arquivo "Variaveis.py"
+
+# Mensagem cifrada em hexadecimal
 mensagem_cifrada_hex = Variaveis.c
 
 # Converter a mensagem cifrada hexadecimal em bytes
 mensagem_cifrada_bytes = bytes.fromhex(mensagem_cifrada_hex)
 
-# Extrair os bytes do IV (primeiros 16 bytes)
+# Extrair os bytes do IV
 iv = mensagem_cifrada_bytes[:16]
 
-# Extrair a mensagem cifrada (a partir do 16º byte)
+# Extrair a mensagem cifrada
 mensagem_cifrada_sem_iv = mensagem_cifrada_bytes[16:]
 
 # Calcular o hash SHA-256 da mensagem cifrada sem o IV
@@ -21,7 +25,7 @@ print("Hash SHA-256 da mensagem cifrada (sem IV):", hash_c)
 
 # Assinatura SigC da mensagem em hexadecimal
 sig_c_hex = Variaveis.SigC
-sig_c = int(sig_c_hex, 16)  # Converter a assinatura de hexadecimal para inteiro
+sig_c = int(sig_c_hex, 16)
 
 # Exponente
 exponente_hex = Variaveis.Ep
